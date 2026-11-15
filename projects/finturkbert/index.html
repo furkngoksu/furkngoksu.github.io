@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FinTurkBERT · Furkan Göksu</title>
+  <meta name="description" content="Sentiment analysis for Turkish financial text, adapted from BERTurk with domain-adaptive pretraining and LoRA.">
+  <meta property="og:title" content="FinTurkBERT">
+  <meta property="og:description" content="Sentiment analysis for Turkish financial text, adapted from BERTurk with domain-adaptive pretraining and LoRA.">
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&family=Geist+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="site-header">
+      <a class="brand" href="../../">Furkan Göksu</a>
+      <nav class="nav" aria-label="Main">
+        <a href="../../#work">Work</a>
+        <a href="../../#experience">Experience</a>
+        <a href="../../Furkan_Goksu_CV.pdf">Resume</a>
+      </nav>
+    </header>
+
+    <main>
+      <div class="page-head">
+        <h1>FinTurkBERT</h1>
+        <p class="lead">A language model that labels Turkish financial statements as positive, negative or neutral from an investor's point of view.</p>
+        <dl class="facts">
+          <div><dt class="mono">Context</dt><dd>NLP team project, ITU</dd></div>
+          <div><dt class="mono">Links</dt><dd><a href="https://github.com/furkngoksu/FinTurkBERT">GitHub</a> · <a href="https://huggingface.co/ff112/FinTurkBERT">Hugging Face</a></dd></div>
+        </dl>
+      </div>
+
+      <section aria-labelledby="results-title">
+        <h2 class="label mono" id="results-title">Results</h2>
+        <div class="stats">
+          <div class="stat"><strong>84.40%</strong><span>test accuracy</span></div>
+          <div class="stat"><strong>83.52</strong><span>F1 score</span></div>
+          <div class="stat"><strong>7,814</strong><span>labeled sentences</span></div>
+        </div>
+      </section>
+
+      <section aria-labelledby="problem-title">
+        <h2 class="label mono" id="problem-title">Problem</h2>
+        <div class="prose">
+          <p>General Turkish models miss the financial meaning of a sentence: falling costs are good news, falling revenue is not. There was also little labeled Turkish financial data to train on.</p>
+        </div>
+      </section>
+
+      <section aria-labelledby="approach-title">
+        <h2 class="label mono" id="approach-title">Approach</h2>
+        <div class="prose">
+          <ul>
+            <li>Continued pretraining of BERTurk on Turkish financial text.</li>
+            <li>A 7,814-sentence sentiment dataset, translated, localized and labeled with help from an LLM, then cleaned and deduplicated.</li>
+            <li>Fine-tuning with LoRA for three-class sentiment classification.</li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>© 2026 Furkan Göksu</span>
+      <a href="../../">Back to home</a>
+    </footer>
+  </div>
+</body>
+</html>

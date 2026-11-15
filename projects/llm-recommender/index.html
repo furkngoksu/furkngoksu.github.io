@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LLM-based recommendation · Furkan Göksu</title>
+  <meta name="description" content="A generative movie recommender built on Llama 3, and how fine-tuning data design affects its accuracy and demographic sensitivity.">
+  <meta property="og:title" content="LLM-based recommendation">
+  <meta property="og:description" content="A generative movie recommender built on Llama 3, and how fine-tuning data design affects its accuracy and demographic sensitivity.">
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&family=Geist+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="site-header">
+      <a class="brand" href="../../">Furkan Göksu</a>
+      <nav class="nav" aria-label="Main">
+        <a href="../../#work">Work</a>
+        <a href="../../#experience">Experience</a>
+        <a href="../../Furkan_Goksu_CV.pdf">Resume</a>
+      </nav>
+    </header>
+
+    <main>
+      <div class="page-head">
+        <h1>LLM-based recommendation</h1>
+        <p class="lead">A generative movie recommender built on Llama 3, and a study of how the design of its fine-tuning data affects recommendation quality and demographic sensitivity.</p>
+        <dl class="facts">
+          <div><dt class="mono">Context</dt><dd>Graduation project, ITU</dd></div>
+          <div><dt class="mono">Published</dt><dd>EARL Workshop at CIKM 2026</dd></div>
+          <div><dt class="mono">Paper</dt><dd><a href="https://arxiv.org/abs/2611.03113">arXiv:2611.03113</a></dd></div>
+        </dl>
+      </div>
+
+      <section aria-labelledby="results-title">
+        <h2 class="label mono" id="results-title">Results</h2>
+        <div class="stats">
+          <div class="stat"><strong>12.47%</strong><span>HR@10, up from 7.47%</span></div>
+          <div class="stat"><strong>3,883</strong><span>movies in the catalog</span></div>
+          <div class="stat"><strong>100%</strong><span>of recommendations stay in the catalog</span></div>
+        </div>
+      </section>
+
+      <section aria-labelledby="problem-title">
+        <h2 class="label mono" id="problem-title">Problem</h2>
+        <div class="prose">
+          <p>A language model can recommend movies by writing their titles, but it can also write titles that don't exist. Choices made while preparing the training data, such as prompt wording or how users are sampled, also change what the model learns and which users it serves well.</p>
+        </div>
+      </section>
+
+      <section aria-labelledby="approach-title">
+        <h2 class="label mono" id="approach-title">Approach</h2>
+        <div class="prose">
+          <ul>
+            <li>Llama-3-8B-Instruct fine-tuned with LoRA on MovieLens-1M user histories.</li>
+            <li>Each recommended title is wrapped in special tokens. While the model writes a title, decoding follows a prefix tree built from the catalog, so every output is a real movie.</li>
+            <li>Models trained with different data mixes, prompt templates, title formats and group-balanced sampling, then compared on accuracy and on differences between user groups.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section aria-labelledby="team-title">
+        <h2 class="label mono" id="team-title">Authors</h2>
+        <div class="prose">
+          <p>Furkan Yasir Göksu, Yaren Yılmaz and Şule Gündüz Öğüdücü, Istanbul Technical University.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>© 2026 Furkan Göksu</span>
+      <a href="../../">Back to home</a>
+    </footer>
+  </div>
+</body>
+</html>

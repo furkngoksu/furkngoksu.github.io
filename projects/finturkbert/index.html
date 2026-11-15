@@ -3,69 +3,107 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>FinTurkBERT · Furkan Göksu</title>
-  <meta name="description" content="Sentiment analysis for Turkish financial text, adapted from BERTurk with domain-adaptive pretraining and LoRA.">
-  <meta property="og:title" content="FinTurkBERT">
-  <meta property="og:description" content="Sentiment analysis for Turkish financial text, adapted from BERTurk with domain-adaptive pretraining and LoRA.">
+  <title>FinTurkBERT | Furkan Goksu</title>
+  <meta name="description" content="Sentiment analysis for Turkish financial text, adapted from BERTurk.">
+  <meta property="og:title" content="FinTurkBERT | Furkan Goksu">
+  <meta property="og:description" content="Sentiment analysis for Turkish financial text, adapted from BERTurk.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://furkngoksu.github.io/assets/img/avatar.jpg">
   <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&family=Geist+Mono:wght@400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../assets/style.css">
 </head>
 <body>
-  <div class="wrap">
-    <header class="site-header">
-      <a class="brand" href="../../">Furkan Göksu</a>
-      <nav class="nav" aria-label="Main">
-        <a href="../../#work">Work</a>
-        <a href="../../#experience">Experience</a>
+  <header class="top">
+    <div class="wrap">
+      <a class="brand" href="../../"><img src="../../assets/img/avatar.jpg" alt="" width="30" height="30">Furkan Goksu</a>
+      <nav aria-label="Main">
+        <a class="opt" href="../../#experience">Experience</a>
+        <a class="opt-sm" href="../../#projects">Projects</a>
         <a href="../../Furkan_Goksu_CV.pdf">Resume</a>
       </nav>
-    </header>
+    </div>
+  </header>
 
-    <main>
-      <div class="page-head">
-        <h1>FinTurkBERT</h1>
-        <p class="lead">A language model that labels Turkish financial statements as positive, negative or neutral from an investor's point of view.</p>
-        <dl class="facts">
-          <div><dt class="mono">Context</dt><dd>NLP team project, ITU</dd></div>
-          <div><dt class="mono">Links</dt><dd><a href="https://github.com/furkngoksu/FinTurkBERT">GitHub</a> · <a href="https://huggingface.co/ff112/FinTurkBERT">Hugging Face</a></dd></div>
-        </dl>
+  <main>
+    <section class="wrap page-hero">
+      <a class="back" href="../../#projects">Back to home</a>
+      <p class="eyebrow">NLP PROJECT</p>
+      <h1>FinTurkBERT</h1>
+      <p class="lead">A Turkish language model adapted to financial text. It labels statements from news, company announcements and market commentary as positive, negative or neutral from an investor's point of view.</p>
+      <dl class="facts">
+          <div><dt>Context</dt><dd>NLP team project, ITU</dd></div>
+          <div><dt>Model</dt><dd><a href="https://huggingface.co/ff112/FinTurkBERT">Hugging Face</a></dd></div>
+          <div><dt>Code</dt><dd><a href="https://github.com/furkngoksu/FinTurkBERT">GitHub</a></dd></div>
+      </dl>
+    </section>
+    <div class="wrap"><img class="cover" src="../../assets/img/cover-fin.jpg" alt="" width="1200" height="675"></div>
+    <div class="band">
+      <section class="wrap section">
+      <div class="article">
+        <h2>Built with</h2>
+        <div class="text">
+<ul class="tags"><li>BERTurk</li><li>PyTorch</li><li>Transformers</li><li>LoRA</li><li>Hugging Face</li></ul>
+        </div>
       </div>
-
-      <section aria-labelledby="results-title">
-        <h2 class="label mono" id="results-title">Results</h2>
-        <div class="stats">
-          <div class="stat"><strong>84.40%</strong><span>test accuracy</span></div>
-          <div class="stat"><strong>83.52</strong><span>F1 score</span></div>
-          <div class="stat"><strong>7,814</strong><span>labeled sentences</span></div>
+      <div class="article">
+        <h2>The problem</h2>
+        <div class="text">
+          <p>General Turkish models miss the financial meaning of a sentence: falling costs are good news, falling revenue is not. There was also very little labeled Turkish financial data to learn from.</p>
         </div>
-      </section>
-
-      <section aria-labelledby="problem-title">
-        <h2 class="label mono" id="problem-title">Problem</h2>
-        <div class="prose">
-          <p>General Turkish models miss the financial meaning of a sentence: falling costs are good news, falling revenue is not. There was also little labeled Turkish financial data to train on.</p>
+      </div>
+      <div class="article">
+        <h2>How it works</h2>
+        <div class="text">
+          <ol class="steps">
+            <li>Collect Turkish financial news from about twenty sources, then filter and deduplicate it.</li>
+            <li>Continue pretraining BERTurk on this text so it learns the language of finance.</li>
+            <li>Build a labeled sentiment dataset by translating and localizing English datasets with an LLM and adding curated Turkish news.</li>
+            <li>Fine-tune with LoRA for three classes: negative, neutral and positive.</li>
+          </ol>
         </div>
-      </section>
-
-      <section aria-labelledby="approach-title">
-        <h2 class="label mono" id="approach-title">Approach</h2>
-        <div class="prose">
-          <ul>
-            <li>Continued pretraining of BERTurk on Turkish financial text.</li>
-            <li>A 7,814-sentence sentiment dataset, translated, localized and labeled with help from an LLM, then cleaned and deduplicated.</li>
-            <li>Fine-tuning with LoRA for three-class sentiment classification.</li>
-          </ul>
+      </div>
+      <div class="article">
+        <h2>Dataset</h2>
+        <div class="text">
+          <div class="table-box"><table>
+            <thead><tr><th scope="col">Source</th><th scope="col" class="num">Sentences</th></tr></thead>
+            <tbody>
+              <tr><td>Financial PhraseBank, translated and localized</td><td class="num">4,846</td></tr>
+              <tr><td>Curated Turkish financial news</td><td class="num">2,197</td></tr>
+              <tr><td>FiQA, translated and localized</td><td class="num">771</td></tr>
+              <tr><td>Total</td><td class="num">7,814</td></tr>
+            </tbody>
+          </table></div>
         </div>
+      </div>
+      <div class="article">
+        <h2>Results</h2>
+        <div class="text">
+          <div class="table-box"><table>
+            <thead><tr><th scope="col">Metric</th><th scope="col" class="num">Test set</th></tr></thead>
+            <tbody>
+              <tr><td>Accuracy</td><td class="num">84.40%</td></tr>
+              <tr><td>F1 score</td><td class="num">83.52</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+      </div>
       </section>
-    </main>
+    </div>
+  </main>
 
-    <footer class="site-footer">
-      <span>© 2026 Furkan Göksu</span>
-      <a href="../../">Back to home</a>
-    </footer>
-  </div>
+  <footer class="foot">
+    <div class="wrap">
+      <span>© 2026 Furkan Goksu</span>
+      <div class="icons">
+        <a class="mail" href="mailto:furkan.goksu.399@gmail.com" aria-label="Email"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/></svg></a>
+        <a class="gh" href="https://github.com/furkngoksu" aria-label="GitHub"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg></a>
+        <a class="li" href="https://www.linkedin.com/in/furkan-goksu-x399/" aria-label="LinkedIn"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>

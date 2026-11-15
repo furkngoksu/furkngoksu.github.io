@@ -3,83 +3,110 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdMIRe multimodal ranking · Furkan Göksu</title>
+  <title>AdMIRe multimodal ranking | Furkan Goksu</title>
   <meta name="description" content="Ranking images by what an idiomatic expression means in context, across 15 languages.">
-  <meta property="og:title" content="AdMIRe multimodal ranking">
+  <meta property="og:title" content="AdMIRe multimodal ranking | Furkan Goksu">
   <meta property="og:description" content="Ranking images by what an idiomatic expression means in context, across 15 languages.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://furkngoksu.github.io/assets/img/avatar.jpg">
   <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&family=Geist+Mono:wght@400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../assets/style.css">
 </head>
 <body>
-  <div class="wrap">
-    <header class="site-header">
-      <a class="brand" href="../../">Furkan Göksu</a>
-      <nav class="nav" aria-label="Main">
-        <a href="../../#work">Work</a>
-        <a href="../../#experience">Experience</a>
+  <header class="top">
+    <div class="wrap">
+      <a class="brand" href="../../"><img src="../../assets/img/avatar.jpg" alt="" width="30" height="30">Furkan Goksu</a>
+      <nav aria-label="Main">
+        <a class="opt" href="../../#experience">Experience</a>
+        <a class="opt-sm" href="../../#projects">Projects</a>
         <a href="../../Furkan_Goksu_CV.pdf">Resume</a>
       </nav>
-    </header>
+    </div>
+  </header>
 
-    <main>
-      <div class="page-head">
-        <h1>AdMIRe multimodal ranking</h1>
-        <p class="lead">Given a sentence with a possibly idiomatic expression, rank five images by how well they show its meaning in context. Built for the AdMIRe 2 shared task and evaluated on 15 languages.</p>
-        <dl class="facts">
-          <div><dt class="mono">Context</dt><dd>NLP course project, ITU</dd></div>
-          <div><dt class="mono">Year</dt><dd>2026</dd></div>
-          <div><dt class="mono">Links</dt><dd><a href="https://github.com/furkngoksu/AdMIRe-Multimodal-Ranking">GitHub</a> · <a href="https://github.com/furkngoksu/AdMIRe-Multimodal-Ranking/blob/main/docs/report.pdf">Report</a></dd></div>
-        </dl>
+  <main>
+    <section class="wrap page-hero">
+      <a class="back" href="../../#projects">Back to home</a>
+      <p class="eyebrow">NLP PROJECT</p>
+      <h1>AdMIRe multimodal ranking</h1>
+      <p class="lead">Given a sentence with an idiom, rank five images by how well they show its meaning in context. Built for the AdMIRe 2 shared task, trained on English and Portuguese and tested on 15 languages.</p>
+      <dl class="facts">
+          <div><dt>Context</dt><dd>YZV405E Natural Language Processing, ITU, 2026</dd></div>
+          <div><dt>Team</dt><dd>Deniz Topal, Furkan Yasir Goksu, Faruk Akyol</dd></div>
+          <div><dt>Links</dt><dd><a href="https://github.com/furkngoksu/AdMIRe-Multimodal-Ranking">GitHub</a>, <a href="https://github.com/furkngoksu/AdMIRe-Multimodal-Ranking/blob/main/docs/report.pdf">Final report</a></dd></div>
+      </dl>
+    </section>
+    <div class="wrap"><img class="cover" src="../../assets/img/cover-admire.jpg" alt="" width="1200" height="675"></div>
+    <div class="band">
+      <section class="wrap section">
+      <div class="article">
+        <h2>Built with</h2>
+        <div class="text">
+<ul class="tags"><li>PyTorch</li><li>XLM-RoBERTa</li><li>CLIP</li><li>Transformers</li><li>Optuna</li><li>DeepSeek</li><li>Gemini</li></ul>
+        </div>
       </div>
-
-      <section aria-labelledby="results-title">
-        <h2 class="label mono" id="results-title">Results</h2>
-        <table>
-          <thead>
-            <tr><th scope="col">Split</th><th scope="col" class="num">Top-1 accuracy</th><th scope="col" class="num">nDCG</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Development, English and Portuguese</td><td class="num">43.00%</td><td class="num">85.65%</td></tr>
-            <tr><td>Test, English and Portuguese</td><td class="num">40.05%</td><td class="num">82.46%</td></tr>
-            <tr><td>13 languages unseen in training</td><td class="num">35.01%</td><td class="num">73.00%</td></tr>
-          </tbody>
-        </table>
-        <p class="note">Mean of five seeds.</p>
-      </section>
-
-      <section aria-labelledby="problem-title">
-        <h2 class="label mono" id="problem-title">Problem</h2>
-        <div class="prose">
-          <p>"He finally spilled the beans" can be about beans on the floor or about telling a secret. The model has to decide which meaning the sentence uses before it can pick the right image, and most of the evaluation languages never appear in training.</p>
+      <div class="article">
+        <h2>The problem</h2>
+        <div class="text">
+          <p>"He finally spilled the beans" can be about beans on the floor or about telling a secret. The model has to work out which meaning the sentence uses before it can pick the right image, and 13 of the 15 test languages, including Turkish, Chinese, Georgian, Igbo and Kazakh, never appear in training.</p>
         </div>
-      </section>
-
-      <section aria-labelledby="approach-title">
-        <h2 class="label mono" id="approach-title">Approach</h2>
-        <div class="prose">
-          <ul>
-            <li>An LLM rewrites each sentence four ways, for example by replacing the expression with its literal meaning. How far the sentence embedding moves shows how idiomatic the expression is.</li>
-            <li>A classifier turns this into an idiomaticity score between 0 and 1.</li>
-            <li>The ranking model encodes the sentence with XLM-RoBERTa and each candidate with CLIP. The idiomaticity score adjusts the sentence embedding before matching.</li>
-          </ul>
+      </div>
+      <div class="article">
+        <h2>How it works</h2>
+        <div class="text">
+          <ol class="steps">
+            <li>An LLM rewrites each sentence four ways: swapping a word, dropping part of the idiom, replacing it with its literal meaning, and paraphrasing it.</li>
+            <li>The difference between the original and each rewrite shows how idiomatic the expression is. A classifier turns it into a score between 0 and 1.</li>
+            <li>The ranking model reads the sentence with XLM-RoBERTa and each candidate image and caption with CLIP.</li>
+            <li>The idiomaticity score scales and shifts the sentence representation before the five candidates are compared.</li>
+          </ol>
+          <figure><img src="../../assets/img/idiomaticity_signal.png" alt="Computing the idiomaticity signal for a Turkish example sentence" loading="lazy"><figcaption>How the idiomaticity score is computed for a Turkish sentence</figcaption></figure>
         </div>
-      </section>
-
-      <section aria-labelledby="team-title">
-        <h2 class="label mono" id="team-title">Team</h2>
-        <div class="prose">
-          <p>Deniz Topal, Furkan Yasir Göksu and Faruk Akyol.</p>
+      </div>
+      <div class="article">
+        <h2>Results</h2>
+        <div class="text">
+          <div class="table-box"><table>
+            <thead><tr><th scope="col">Data</th><th scope="col" class="num">Top-1 accuracy</th><th scope="col" class="num">nDCG</th></tr></thead>
+            <tbody>
+              <tr><td>Development, English and Portuguese</td><td class="num">43.00%</td><td class="num">85.65%</td></tr>
+              <tr><td>Test, English and Portuguese</td><td class="num">40.05%</td><td class="num">82.46%</td></tr>
+              <tr><td>13 languages unseen in training</td><td class="num">35.01%</td><td class="num">73.00%</td></tr>
+            </tbody>
+          </table></div>
+          <p class="note">Average of five runs with different random seeds.</p>
         </div>
+      </div>
+      <div class="article">
+        <h2>What each part adds</h2>
+        <div class="text">
+          <div class="findings">
+            <p>Focusing on the idiom's own tokens and adding the rewrite features raises the idiomaticity classifier's F1 from 70.4% to 80.0%.</p>
+            <p>Using the idiomaticity score raises nDCG on unseen languages from 69.1% to 79.4%.</p>
+          </div>
+          <div class="figs">
+            <img src="../../assets/img/idiomaticity_models.png" alt="Comparison of five idiomaticity classifiers" loading="lazy">
+            <img src="../../assets/img/query_fusion.png" alt="Comparison of query fusion strategies" loading="lazy">
+            <img src="../../assets/img/signal_dimension.png" alt="Effect of idiomaticity signal size on unseen languages" loading="lazy">
+          </div>
+        </div>
+      </div>
       </section>
-    </main>
+    </div>
+  </main>
 
-    <footer class="site-footer">
-      <span>© 2026 Furkan Göksu</span>
-      <a href="../../">Back to home</a>
-    </footer>
-  </div>
+  <footer class="foot">
+    <div class="wrap">
+      <span>© 2026 Furkan Goksu</span>
+      <div class="icons">
+        <a class="mail" href="mailto:furkan.goksu.399@gmail.com" aria-label="Email"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/></svg></a>
+        <a class="gh" href="https://github.com/furkngoksu" aria-label="GitHub"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg></a>
+        <a class="li" href="https://www.linkedin.com/in/furkan-goksu-x399/" aria-label="LinkedIn"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>

@@ -3,77 +3,108 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>LLM-based recommendation · Furkan Göksu</title>
-  <meta name="description" content="A generative movie recommender built on Llama 3, and how fine-tuning data design affects its accuracy and demographic sensitivity.">
-  <meta property="og:title" content="LLM-based recommendation">
-  <meta property="og:description" content="A generative movie recommender built on Llama 3, and how fine-tuning data design affects its accuracy and demographic sensitivity.">
+  <title>LLM-based movie recommendation | Furkan Goksu</title>
+  <meta name="description" content="A movie recommender built on Llama 3, and how fine-tuning data design affects its quality and fairness.">
+  <meta property="og:title" content="LLM-based movie recommendation | Furkan Goksu">
+  <meta property="og:description" content="A movie recommender built on Llama 3, and how fine-tuning data design affects its quality and fairness.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://furkngoksu.github.io/assets/img/avatar.jpg">
   <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&family=Geist+Mono:wght@400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../assets/style.css">
 </head>
 <body>
-  <div class="wrap">
-    <header class="site-header">
-      <a class="brand" href="../../">Furkan Göksu</a>
-      <nav class="nav" aria-label="Main">
-        <a href="../../#work">Work</a>
-        <a href="../../#experience">Experience</a>
+  <header class="top">
+    <div class="wrap">
+      <a class="brand" href="../../"><img src="../../assets/img/avatar.jpg" alt="" width="30" height="30">Furkan Goksu</a>
+      <nav aria-label="Main">
+        <a class="opt" href="../../#experience">Experience</a>
+        <a class="opt-sm" href="../../#projects">Projects</a>
         <a href="../../Furkan_Goksu_CV.pdf">Resume</a>
       </nav>
-    </header>
+    </div>
+  </header>
 
-    <main>
-      <div class="page-head">
-        <h1>LLM-based recommendation</h1>
-        <p class="lead">A generative movie recommender built on Llama 3, and a study of how the design of its fine-tuning data affects recommendation quality and demographic sensitivity.</p>
-        <dl class="facts">
-          <div><dt class="mono">Context</dt><dd>Graduation project, ITU</dd></div>
-          <div><dt class="mono">Published</dt><dd>EARL Workshop at CIKM 2026</dd></div>
-          <div><dt class="mono">Paper</dt><dd><a href="https://arxiv.org/abs/2611.03113">arXiv:2611.03113</a></dd></div>
-        </dl>
+  <main>
+    <section class="wrap page-hero">
+      <a class="back" href="../../#projects">Back to home</a>
+      <p class="eyebrow">GRADUATION PROJECT AND PAPER</p>
+      <h1>LLM-based movie recommendation</h1>
+      <p class="lead">A recommender built on Llama 3 that writes its suggestions as text and only picks movies that exist in the catalog, plus a study of how the fine-tuning data shapes its accuracy and how evenly it serves different users.</p>
+      <dl class="facts">
+          <div><dt>Context</dt><dd>Graduation project, ITU</dd></div>
+          <div><dt>Published</dt><dd>EARL Workshop, CIKM 2026</dd></div>
+          <div><dt>Paper</dt><dd><a href="https://arxiv.org/abs/2611.03113">arXiv:2611.03113</a></dd></div>
+          <div><dt>Authors</dt><dd>Furkan Yasir Goksu, Yaren Yılmaz, Şule Gündüz Öğüdücü</dd></div>
+      </dl>
+    </section>
+    <div class="wrap"><img class="cover" src="../../assets/img/cover-rec.jpg" alt="" width="1200" height="675"></div>
+    <div class="band">
+      <section class="wrap section">
+      <div class="article">
+        <h2>Built with</h2>
+        <div class="text">
+<ul class="tags"><li>Llama 3 8B</li><li>LoRA</li><li>PyTorch</li><li>vLLM</li><li>MovieLens-1M</li><li>Prefix tree decoding</li></ul>
+        </div>
       </div>
-
-      <section aria-labelledby="results-title">
-        <h2 class="label mono" id="results-title">Results</h2>
-        <div class="stats">
-          <div class="stat"><strong>12.47%</strong><span>HR@10, up from 7.47%</span></div>
-          <div class="stat"><strong>3,883</strong><span>movies in the catalog</span></div>
-          <div class="stat"><strong>100%</strong><span>of recommendations stay in the catalog</span></div>
+      <div class="article">
+        <h2>The problem</h2>
+        <div class="text">
+          <p>A language model can recommend movies by writing their titles, but it can also invent titles that don't exist or repeat itself. The way the training data is prepared, such as how prompts are worded, how titles are written or how users are sampled, also changes what the model learns and which users it serves well.</p>
         </div>
-      </section>
-
-      <section aria-labelledby="problem-title">
-        <h2 class="label mono" id="problem-title">Problem</h2>
-        <div class="prose">
-          <p>A language model can recommend movies by writing their titles, but it can also write titles that don't exist. Choices made while preparing the training data, such as prompt wording or how users are sampled, also change what the model learns and which users it serves well.</p>
+      </div>
+      <div class="article">
+        <h2>How it works</h2>
+        <div class="text">
+          <ol class="steps">
+            <li>Build each user's history from MovieLens-1M ratings of 4 or higher, in time order.</li>
+            <li>Turn histories into training examples with many prompt templates, asking for the next movies.</li>
+            <li>Fine-tune Llama-3-8B-Instruct with LoRA so it writes each title between special start and end tokens.</li>
+            <li>Build a prefix tree over the tokens of all 3,883 catalog titles.</li>
+            <li>While the model writes a title, only allow tokens that continue a real title, so every suggestion is in the catalog.</li>
+          </ol>
         </div>
-      </section>
-
-      <section aria-labelledby="approach-title">
-        <h2 class="label mono" id="approach-title">Approach</h2>
-        <div class="prose">
-          <ul>
-            <li>Llama-3-8B-Instruct fine-tuned with LoRA on MovieLens-1M user histories.</li>
-            <li>Each recommended title is wrapped in special tokens. While the model writes a title, decoding follows a prefix tree built from the catalog, so every output is a real movie.</li>
-            <li>Models trained with different data mixes, prompt templates, title formats and group-balanced sampling, then compared on accuracy and on differences between user groups.</li>
-          </ul>
+      </div>
+      <div class="article">
+        <h2>Results</h2>
+        <div class="text">
+          <div class="table-box"><table>
+            <thead><tr><th scope="col">Model</th><th scope="col" class="num">HR@10</th><th scope="col" class="num">Out of catalog</th></tr></thead>
+            <tbody>
+              <tr><td>Fine-tuned baseline, free generation</td><td class="num">7.47%</td><td class="num">2.08%</td></tr>
+              <tr><td>Catalog-constrained training</td><td class="num">9.89%</td><td class="num">0%</td></tr>
+              <tr><td>Varied prompts</td><td class="num">10.67%</td><td class="num">0%</td></tr>
+              <tr><td>Varied prompts, original title format</td><td class="num">12.47%</td><td class="num">0%</td></tr>
+            </tbody>
+          </table></div>
+          <p class="note">Mean of five seeds over 4,995 users with greedy decoding.</p>
         </div>
-      </section>
-
-      <section aria-labelledby="team-title">
-        <h2 class="label mono" id="team-title">Authors</h2>
-        <div class="prose">
-          <p>Furkan Yasir Göksu, Yaren Yılmaz and Şule Gündüz Öğüdücü, Istanbul Technical University.</p>
+      </div>
+      <div class="article">
+        <h2>Findings</h2>
+        <div class="text">
+          <div class="findings">
+            <p>Writing titles the way MovieLens does, with the article at the end, adds 1.80 points of HR@10 and reaches 253 more distinct movies. It changes which token the model has to commit to first.</p>
+            <p>Six models trained with different data mixes and losses land within one point of each other, so the loss function matters less than the data format.</p>
+            <p>Balancing training data by gender costs 1.15 points of accuracy, while adding movie knowledge keeps accuracy and makes recommendations the most even across user groups.</p>
+          </div>
         </div>
+      </div>
       </section>
-    </main>
+    </div>
+  </main>
 
-    <footer class="site-footer">
-      <span>© 2026 Furkan Göksu</span>
-      <a href="../../">Back to home</a>
-    </footer>
-  </div>
+  <footer class="foot">
+    <div class="wrap">
+      <span>© 2026 Furkan Goksu</span>
+      <div class="icons">
+        <a class="mail" href="mailto:furkan.goksu.399@gmail.com" aria-label="Email"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/></svg></a>
+        <a class="gh" href="https://github.com/furkngoksu" aria-label="GitHub"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg></a>
+        <a class="li" href="https://www.linkedin.com/in/furkan-goksu-x399/" aria-label="LinkedIn"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>

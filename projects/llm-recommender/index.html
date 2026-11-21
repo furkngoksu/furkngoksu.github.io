@@ -67,27 +67,12 @@
         </div>
       </div>
       <div class="article">
-        <h2>Results</h2>
-        <div class="text">
-          <div class="table-box"><table>
-            <thead><tr><th scope="col">Model</th><th scope="col" class="num">HR@10</th><th scope="col" class="num">Out of catalog</th></tr></thead>
-            <tbody>
-              <tr><td>Fine-tuned baseline, free generation</td><td class="num">7.47%</td><td class="num">2.08%</td></tr>
-              <tr><td>Catalog-constrained training</td><td class="num">9.89%</td><td class="num">0%</td></tr>
-              <tr><td>Varied prompts</td><td class="num">10.67%</td><td class="num">0%</td></tr>
-              <tr><td>Varied prompts, original title format</td><td class="num">12.47%</td><td class="num">0%</td></tr>
-            </tbody>
-          </table></div>
-          <p class="note">Mean of five seeds over 4,995 users with greedy decoding.</p>
-        </div>
-      </div>
-      <div class="article">
         <h2>Findings</h2>
         <div class="text">
           <div class="findings">
-            <p>Writing titles the way MovieLens does, with the article at the end, adds 1.80 points of HR@10 and reaches 253 more distinct movies. It changes which token the model has to commit to first.</p>
-            <p>Six models trained with different data mixes and losses land within one point of each other, so the loss function matters less than the data format.</p>
-            <p>Balancing training data by gender costs 1.15 points of accuracy, while adding movie knowledge keeps accuracy and makes recommendations the most even across user groups.</p>
+            <p>Writing titles the way MovieLens does, with the article at the end, gives better recommendations and a wider range of movies. It changes which token the model has to commit to first.</p>
+            <p>Models trained with different data mixes and losses end up very close to each other, so the loss function matters less than the data format.</p>
+            <p>Balancing training data by gender costs some accuracy, while adding movie knowledge keeps accuracy and makes recommendations the most even across user groups.</p>
           </div>
         </div>
       </div>
